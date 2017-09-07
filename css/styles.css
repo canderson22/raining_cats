@@ -6,6 +6,17 @@ body {
     height: 700px;
     text-align: center;
     background: black;
+    color: white;
+    font-size: xx-large;
+}
+
+.btn {
+    font-size: xx-large;
+    color: white;
+    background: dodgerblue;
+    border: 1px solid blue;
+    border-radius: 4px;
+    box-shadow: 0px 0px 0px 2px white;
 }
 
 #game-header, #players-name, .clouds span {
@@ -17,7 +28,9 @@ body {
 }
 
 .cat {
-    background: red;
+    background-image: url('../images/cat.jpeg');
+    background-size: contain;
+    background-position-x: center;
     border-radius: 50%;
     height: 100px;
     width: 100px;
@@ -52,18 +65,18 @@ header {
     border-radius: 5px;
 }
 
+.img {
+    width: 160px;
+    border-radius: 8px;
+}
+
 footer {
     border: 1px solid white;
     height: 100px;
-    background-image: url('../images/dogs.jpg');
+    background-image: url('../images/hungryDog.jpg');
     background-size: contain;
     position: absolute;
     bottom: 0;
     width: 100%;
     z-index: 5;
-}
-
-.h1 {
-    color: white;
-    font-size: x-large;
 }

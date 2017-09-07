@@ -1,4 +1,5 @@
 var $body = $('body');
+var $btn = $('.btn');
 
 var generateGame = function() {
     var $header = $('<header>');
@@ -12,7 +13,6 @@ var generateGame = function() {
 
 }
 
-generateGame();
 
 var game = {
     score: 0,
@@ -140,6 +140,7 @@ var game = {
             this.checkWinner();
         } else {
             var $h1 = $('<h1>Player 2 get Ready</h1>');
+            var $h2 = $('<h2>Score to beat ' + this.players[0].total)
             $h1.addClass('h1');
             $body.append($h1);
             setTimeout(function() {
@@ -153,12 +154,20 @@ var game = {
         alert('good')
     }
 }
-
-
-
 game.currentPlayer = game.players[0];
 
-game.startGame();
+
+$btn.on('click', function() {
+    $body.empty();
+    $body.css({
+        cursor: '-webkit-grab'
+    })
+    generateGame();
+    game.startGame();
+})
+
+
+
 
 $body.on('mouseenter', '.cat', function() {
     game.catchCat(this);
