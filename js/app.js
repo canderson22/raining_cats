@@ -1,5 +1,19 @@
 var $body = $('body');
 
+var generateGame = function() {
+    var $header = $('<header>');
+    var $div1 = $('<div class="clouds cloud1"><span id="players-name">');
+    var $div2 = $('<div class="clouds cloud2"><span id="game-header">');
+    var $div3 = $('<div class="clouds cloud1"><span>Score: <span id="score">');
+    var $div4 = $('<div class="clouds cloud2"><span>Missed: <span id="missed">');
+    var $footer = $('<footer>');
+    $header.append($div1, $div2, $div3, $div4);
+    $body.append($header, $footer);
+
+}
+
+generateGame();
+
 var game = {
     score: 0,
     gameHeader: $('#game-header'),
@@ -12,37 +26,29 @@ var game = {
     players: [
         {
             name: 'Player 1',
-            score: 0,
-            missed: 0,
+            total: 0,
             played: false
         },
         {
             name: 'Player 2',
-            score: 0,
-            missed: 0,
+            total: 0,
             played: false
         }
     ],
     switchTurn: function() {
-        if (this.currentPlayer == players[0]) {
-            this.currentPlayer = players[1];
+        if (this.currentPlayer == this.players[0]) {
+            this.currentPlayer = this.players[1];
         }
     },
     lostCat: function(cat) {
         $(cat).remove();
         this.missed++;
         this.missCard.text(this.missed);
-        this.checkMissed();
     },
     catchCat: function(cat) {
         $(cat).stop().remove();
         this.score = this.score + 1;
         this.scoreCard.text(this.score);
-    },
-    checkMissed: function() {
-        if (this.missed > 3) {
-            console.log('too many')
-        }
     },
     rainCats: function(speed) {
         var that = this;
@@ -87,7 +93,7 @@ var game = {
         this['level_' + this.checkLevel()]();
     },
     startGame: function() {
-        this.namePlace.text(this.players[0].name)
+        this.namePlace.text(this.currentPlayer.name)
         this.gameHeader.text('Get ready to save some cats!!');
         var that = this;
         this.rainCats(3000);
@@ -125,16 +131,29 @@ var game = {
        
     },
     level_complete: function() {
-        var total = this.score + this.missed;
-        alert(total)
+        var total = this.score - this.missed;
+        this.currentPlayer.total = total;
+        this.currentPlayer.played = true;
+        this.switchTurn();
         $body.empty();
+        var $h1 = $('<h1>Player 2 get Ready</h1>');
+        $h1.animate({
+            left: '250px',
+            top: '300px',
+            fontSize: 'x-large'
+        }, 2000, function() {
+            $h1.remove();
+        });
+        $body.append($h1);
     }
 }
+
+
+
+game.currentPlayer = game.players[0];
+
+game.startGame();
 
 $body.on('click', '.cat', function() {
     game.catchCat(this);
 }); 
-
-game.currentPlayer 
-
-game.startGame();
