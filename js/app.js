@@ -16,11 +16,6 @@ generateGame();
 
 var game = {
     score: 0,
-    gameHeader: $('#game-header'),
-    clouds: $('.clouds'),
-    namePlace: $('#players-name'),
-    scoreCard: $('#score'),
-    missCard: $('#missed'),
     missed: 0,
     level: 1,
     players: [
@@ -43,12 +38,12 @@ var game = {
     lostCat: function(cat) {
         $(cat).remove();
         this.missed++;
-        this.missCard.text(this.missed);
+        $('#missed').text(this.missed);
     },
     catchCat: function(cat) {
         $(cat).stop().remove();
         this.score = this.score + 1;
-        this.scoreCard.text(this.score);
+        $('#score').text(this.score);
     },
     rainCats: function(speed) {
         var that = this;
@@ -69,7 +64,7 @@ var game = {
 
             $body.append($cat);
 
-        }, 3000);
+        }, 500);
         
         setTimeout(function() {
             clearInterval(fallingCats)
@@ -89,62 +84,73 @@ var game = {
     },
     clearLevel: function() {
         this.level++;
-        $('.cat').stop();
+        $('.cat').stop().remove();
         this['level_' + this.checkLevel()]();
     },
     startGame: function() {
-        this.namePlace.text(this.currentPlayer.name)
-        this.gameHeader.text('Get ready to save some cats!!');
+        $('#players-name').text(this.currentPlayer.name)
+        $('#game-header').text('Get ready to save some cats!!');
         var that = this;
         this.rainCats(3000);
        
     },
     level_two: function() {
-        this.gameHeader.text("Congrats! Get Ready for Level 2!");
-        this.clouds.css({
+        $('#game-header').text("Get Ready for Level 2!");
+        $('.clouds').css({
             background: '-webkit-linear-gradient(top, #d6dee4 5%, #9cdeff 100%)'
         })
         var that = this;
-        this.rainCats(2500);
+        setTimeout(this.rainCats(2500), 5000);
       
     },
     level_three: function() {
-        this.gameHeader.text("Congrats! Get Ready for Level 3!");
-        this.clouds.css({
+        $('#game-header').text("Get Ready for Level 3!");
+        $('.clouds').css({
             background: '-webkit-linear-gradient(top, rgb(201, 207, 212) 5%, rgb(69, 193, 255) 100%)'
         })
         var that = this;
-        this.rainCats(2000);
+        setTimeout(this.rainCats(2000), 10000);
        
     },
     level_four: function() {
-        this.gameHeader.text("Congrats! Get Ready for Level 4!");
-        this.clouds.css({
+        $('#game-header').text("Get Ready for Level 4!");
+        $('.clouds').css({
             background: '-webkit-linear-gradient(top, #707273 5%, #00689c 100%)'
         });
-        this.gameHeader.css({
+        $('.clouds').children().css({
             color: 'white',
             textShadow: '1px 0px 0px black'
         })
         var that = this;
-        this.rainCats(1500);
+        setTimeout(this.rainCats(1500), 10000);
        
     },
     level_complete: function() {
         var total = this.score - this.missed;
         this.currentPlayer.total = total;
         this.currentPlayer.played = true;
+        this.score = 0;
+        this.missed = 0;
+        this.level = 1;
         this.switchTurn();
         $body.empty();
-        var $h1 = $('<h1>Player 2 get Ready</h1>');
-        $h1.animate({
-            left: '250px',
-            top: '300px',
-            fontSize: 'x-large'
-        }, 2000, function() {
-            $h1.remove();
-        });
-        $body.append($h1);
+
+
+        if (this.players[0].played == true && this.players[1].played == true) {
+            this.checkWinner();
+        } else {
+            var $h1 = $('<h1>Player 2 get Ready</h1>');
+            $h1.addClass('h1');
+            $body.append($h1);
+            setTimeout(function() {
+                $body.empty();
+                generateGame();
+                game.startGame()
+            }, 6000)
+        }
+    },
+    checkWinner: function() {
+        alert('good')
     }
 }
 
@@ -154,6 +160,6 @@ game.currentPlayer = game.players[0];
 
 game.startGame();
 
-$body.on('click', '.cat', function() {
+$body.on('mouseenter', '.cat', function() {
     game.catchCat(this);
 }); 
