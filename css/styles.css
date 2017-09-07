@@ -8,7 +8,7 @@ body {
     background: black;
 }
 
-#game-header {
+#game-header, #players-name, .clouds span {
     font-size: xx-large;
     color: #2e0abf;
     text-shadow: 2px 2px 1px white;

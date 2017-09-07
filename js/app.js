@@ -13,12 +13,14 @@ var game = {
         {
             name: 'Player 1',
             score: 0,
-            missed: 0
+            missed: 0,
+            played: false
         },
         {
             name: 'Player 2',
             score: 0,
-            missed: 0
+            missed: 0,
+            played: false
         }
     ],
     switchTurn: function() {
@@ -34,7 +36,7 @@ var game = {
     },
     catchCat: function(cat) {
         $(cat).stop().remove();
-        this.score++;
+        this.score = this.score + 1;
         this.scoreCard.text(this.score);
     },
     checkMissed: function() {
@@ -66,7 +68,7 @@ var game = {
         setTimeout(function() {
             clearInterval(fallingCats)
             that.clearLevel();
-        }, 6000)
+        }, 30000)
     },
     checkLevel: function() {
         if (this.level == 2) {
@@ -81,18 +83,15 @@ var game = {
     },
     clearLevel: function() {
         this.level++;
-        this.missed = 0;
         $('.cat').stop();
         this['level_' + this.checkLevel()]();
     },
     startGame: function() {
-        ht
+        this.namePlace.text(this.players[0].name)
         this.gameHeader.text('Get ready to save some cats!!');
         var that = this;
         this.rainCats(3000);
-        $body.on('click', '.cat', function() {
-            that.catchCat(this);
-        });
+       
     },
     level_two: function() {
         this.gameHeader.text("Congrats! Get Ready for Level 2!");
@@ -101,9 +100,7 @@ var game = {
         })
         var that = this;
         this.rainCats(2500);
-        $body.on('click', '.cat', function() {
-            that.catchCat(this);
-        });
+      
     },
     level_three: function() {
         this.gameHeader.text("Congrats! Get Ready for Level 3!");
@@ -112,9 +109,7 @@ var game = {
         })
         var that = this;
         this.rainCats(2000);
-        $body.on('click', '.cat', function() {
-            that.catchCat(this);
-        });
+       
     },
     level_four: function() {
         this.gameHeader.text("Congrats! Get Ready for Level 4!");
@@ -127,13 +122,19 @@ var game = {
         })
         var that = this;
         this.rainCats(1500);
-        $body.on('click', '.cat', function() {
-            that.catchCat(this);
-        }); 
+       
     },
     level_complete: function() {
-
+        var total = this.score + this.missed;
+        alert(total)
+        $body.empty();
     }
 }
+
+$body.on('click', '.cat', function() {
+    game.catchCat(this);
+}); 
+
+game.currentPlayer 
 
 game.startGame();
