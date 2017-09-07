@@ -5,7 +5,17 @@ body {
     width: auto;
     height: 700px;
     text-align: center;
-    background: black;
+    background: -webkit-linear-gradient(top, #4b6cb7 5%, #182848 100%);
+    color: white;
+    font-size: xx-large;
+}
+
+input {
+    font-size: xx-large;
+    margin-bottom: 25px;
+}
+
+h2 {
     color: white;
     font-size: xx-large;
 }
