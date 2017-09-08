@@ -2,7 +2,9 @@ var $body = $('body');
 var $form = $('.form');
 var $bestScore = $('#best-score');
 var bestPlayer = JSON.parse(localStorage.getItem('bestScore'));
-$bestScore.text(bestPlayer.name + ', Score: ' + bestPlayer.total);
+if (bestPlayer) {
+    $bestScore.text(bestPlayer.name + ', Score: ' + bestPlayer.total);
+}
 
 
 var generateGame = function() {
@@ -19,7 +21,6 @@ var generateGame = function() {
     var $footer = $('<footer>');
     $header.append($div1, $div2, $div3, $div4);
     $body.append($header, $footer);
-
 }
 
 
