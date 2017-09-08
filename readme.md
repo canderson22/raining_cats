@@ -17,7 +17,11 @@ Started with a game object where I tried to put most of the logic for the whole 
 
 ##Unsolved Problems
 
-I wanted to use local storage to contain the highest score of any game played and display it on the landing page, but I ran out of time.
+Wanted to clean up code that is not DRY.
+Styling issues with background being displayed on different screens.
+Smoother transitions from round to round.
+Better styling of overall game.
+
 
 ##User Stories
 
@@ -30,3 +34,5 @@ As a user, I can easily understand the instructions, so I know how to score and 
 As a user, when I win its clearly displayed, so I know I have won.
 
 As a user, it is easy to restart the game, so i can quickly play again.
+
+As a user, if I have the highest score ever, I would like it to be saved to be given the recognition.
