@@ -48,15 +48,21 @@ var game = {
     checkBestScore: function(player) {
         var player = player;
         var getBest = JSON.parse(localStorage.getItem('bestScore'));
-        var checkScore = function () {
-            if (player.total < getBest.total) {
-                return getBest
-            } else {
-                return player
-            }
-        };
-        var best = checkScore();
-        localStorage.setItem('bestScore', JSON.stringify(best));
+        console.log(getBest)
+        if (getBest == null) {
+            localStorage.setItem('bestScore', JSON.stringify(player));
+        } else {
+            var checkScore = function () {
+                if (player.total < getBest.total) {
+                    return getBest
+                } else {
+                    return player
+                }
+            };
+            var best = checkScore();
+            localStorage.setItem('bestScore', JSON.stringify(best));
+        }
+        
     },
     lostCat: function(cat) {
         $(cat).remove();
@@ -273,10 +279,11 @@ var game = {
                 })
                 generateGame();
                 game.startGame(); 
-            })
-            $body.append($h1, $reset);
+            });
+
+            $body.append($h1, $reset);            
         } else {
-            var $h1 = $('<h1>Player 2 get Ready<br><h1>Score to beat ' + this.players[0].total + '</h1>');
+            var $h1 = $('<h1>' + this.currentPlayer.name + ' get Ready<br><h1>Score to beat ' + this.players[0].total + '</h1>');
             $h1.addClass('h1');
             $body.append($h1);
             setTimeout(function() {
