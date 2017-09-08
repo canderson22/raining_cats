@@ -10,6 +10,7 @@ After each 20 secound round, the speed of the rain will increase. After player o
 - HTML
 - CSS
 - JavaScript
+- jQuery
 
 ## Approach 
 
