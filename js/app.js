@@ -129,6 +129,7 @@ var game = {
         }, 20000)
     },
     checkLevel: function() {
+        console.log(this.level)
         if (this.level == 2) {
             return 'two'
         } else if (this.level == 3) {
@@ -140,6 +141,7 @@ var game = {
         }
     },
     clearLevel: function() {
+        console.log('logg')
         this.level++;
         $('.cat').stop().remove();
         this['level_' + this.checkLevel()]();
