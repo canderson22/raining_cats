@@ -1,7 +1,15 @@
 var $body = $('body');
 var $form = $('.form');
+var $bestScore = $('#best-score');
+var bestPlayer = JSON.parse(localStorage.getItem('bestScore'));
+$bestScore.text(bestPlayer.name + ', Score: ' + bestPlayer.total);
+
 
 var generateGame = function() {
+    $body.css({
+        background: '-webkit-linear-gradient(top, #4b6cb7 5%, #182848 100%)'        
+    });
+
     var $header = $('<header>');
     var $div1 = $('<div class="clouds cloud1"><span id="players-name">');
     $div1.append('<span id="timer">');
@@ -35,6 +43,19 @@ var game = {
         if (this.currentPlayer == this.players[0]) {
             this.currentPlayer = this.players[1];
         }
+    },
+    checkBestScore: function(player) {
+        var player = player;
+        var getBest = JSON.parse(localStorage.getItem('bestScore'));
+        var checkScore = function () {
+            if (player.total < getBest.total) {
+                return getBest
+            } else {
+                return player
+            }
+        };
+        var best = checkScore();
+        localStorage.setItem('bestScore', JSON.stringify(best));
     },
     lostCat: function(cat) {
         $(cat).remove();
@@ -101,11 +122,11 @@ var game = {
         }, 20000)
     },
     checkLevel: function() {
-        if (this.level == 2) {
+        if (this.level == 5) {
             return 'two'
-        } else if (this.level == 3) {
+        } else if (this.level == 5) {
             return 'three'
-        } else if (this.level == 4) {
+        } else if (this.level == 5) {
             return 'four'
         } else {
             return 'complete'
@@ -224,7 +245,9 @@ var game = {
 
 
         if (this.players[0].played == true && this.players[1].played == true) {
+
             var winner = this.checkWinner();
+            this.checkBestScore(winner);
             $body.empty();
             var $h1 = $('<h1>');
             $h1.text('The Winner is ' + winner.name + ' with a score of ' + winner.total);

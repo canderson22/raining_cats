@@ -5,9 +5,15 @@ body {
     width: auto;
     height: 700px;
     text-align: center;
-    background: -webkit-linear-gradient(top, #4b6cb7 5%, #182848 100%);
-    color: white;
+    color: #21B7EA;
+    text-shadow: 0px 1px 0px black;
+    background: url('../images/bg.jpg');
+    background-size: cover;
     font-size: xx-large;
+}
+
+.bestScore {
+    color: #FF7E00;
 }
 
 .main-head {
