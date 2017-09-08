@@ -129,11 +129,11 @@ var game = {
         }, 20000)
     },
     checkLevel: function() {
-        if (this.level == 5) {
+        if (this.level == 2) {
             return 'two'
-        } else if (this.level == 5) {
+        } else if (this.level == 3) {
             return 'three'
-        } else if (this.level == 5) {
+        } else if (this.level == 4) {
             return 'four'
         } else {
             return 'complete'
