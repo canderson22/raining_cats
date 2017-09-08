@@ -4,6 +4,7 @@ var $form = $('.form');
 var generateGame = function() {
     var $header = $('<header>');
     var $div1 = $('<div class="clouds cloud1"><span id="players-name">');
+    $div1.append('<span id="timer">');
     var $div2 = $('<div class="clouds cloud2"><span id="game-header">');
     var $div3 = $('<div class="clouds cloud1"><span>Score: <span id="score">');
     var $div4 = $('<div class="clouds cloud2"><span>Missed: <span id="missed">');
@@ -42,8 +43,13 @@ var game = {
     },
     catchCat: function(cat) {
         $(cat).stop().remove();
-        this.score = this.score + 3;
+        this.score = this.score + 2;
         $('#score').text(this.score);
+    },
+    catchBCat: function(cat) {
+        $(cat).stop().remove();
+        this.score = this.score + 10;
+        $('#score').text(this.score)
     },
     rainCats: function(speed) {
         var that = this;
@@ -65,11 +71,34 @@ var game = {
             $body.append($cat);
 
         }, 500);
+
+        var bonusCat = setInterval(function() {
+            var $bCat = $('<div>');
+            var horiz = Math.floor(Math.random() * ($body.width() - 100)) + 'px';
+            var vert = $body.height() + 50 + 'px';
+
+            $bCat.addClass('bonus-cat');
+            $bCat.css({
+                left: horiz
+            });
+
+            $bCat.animate({
+                top: vert
+            }, speed, function() {
+                that.lostCat(this);
+            });
+
+            $body.append($bCat);
+
+        }, 8000);
+
+
         
         setTimeout(function() {
             clearInterval(fallingCats)
+            clearInterval(bonusCat)
             that.clearLevel();
-        }, 30000)
+        }, 20000)
     },
     checkLevel: function() {
         if (this.level == 2) {
@@ -92,6 +121,16 @@ var game = {
         $('#game-header').text('Get ready to save some cats!!');
         var that = this;
         this.rainCats(3000);
+        var count = 20;
+        var timer = setInterval(function() {
+            if (count == 0) {
+                clearInterval(timer);
+            } else {
+                count--;
+                $('#timer').text('Timer: ' + count);
+            }
+            
+        }, 1000)
        
     },
     level_two: function() {
@@ -103,6 +142,16 @@ var game = {
         var that = this;
         setTimeout(function() {
             that.rainCats(2500)
+            var count = 20;
+            var timer = setInterval(function() {
+                if (count == 0) {
+                    clearInterval(timer);
+                } else {
+                    count--;
+                    $('#timer').text('Timer: ' + count);
+                }
+                
+            }, 1000)
         }, 5000)
       
     },
@@ -116,6 +165,16 @@ var game = {
         var that = this;
         setTimeout(function() {
             that.rainCats(2000)
+            var count = 20;
+            var timer = setInterval(function() {
+                if (count == 0) {
+                    clearInterval(timer);
+                } else {
+                    count--;
+                    $('#timer').text('Timer: ' + count);
+                }
+                
+            }, 1000)
         }, 5000)
        
     },
@@ -140,6 +199,16 @@ var game = {
         var that = this;
         setTimeout(function() {
             that.rainCats(1500)
+            var count = 20;
+            var timer = setInterval(function() {
+                if (count == 0) {
+                    clearInterval(timer);
+                } else {
+                    count--;
+                    $('#timer').text('Timer: ' + count);
+                }
+                
+            }, 1000)
         }, 5000)
        
     },
@@ -228,4 +297,7 @@ $form.on('submit', function(e) {
 
 $body.on('mouseenter', '.cat', function() {
     game.catchCat(this);
+}); 
+$body.on('mouseenter', '.bonus-cat', function() {
+    game.catchBCat(this);
 }); 

@@ -17,7 +17,7 @@ input {
 
 h2 {
     color: white;
-    font-size: xx-large;
+    font-size: large;
 }
 
 .btn {
@@ -39,6 +39,17 @@ h2 {
 
 .cat {
     background-image: url('../images/cat.jpeg');
+    background-size: contain;
+    background-position-x: center;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    z-index: 1;
+}
+
+.bonus-cat {
+    background-image: url('../images/bonus.png');
     background-size: contain;
     background-position-x: center;
     border-radius: 50%;
