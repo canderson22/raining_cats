@@ -3,7 +3,8 @@
 Catch the most raining cats to avoid them getting eated by hungry dogs.
 
 ## How to play
-Each player will have four 20 second rounds to catch the most cats they can, but after round the rain will increase in speed.
+Each player will have four 20 second rounds to catch the most cats they can by moving the mouse over each cat.
+After each 20 secound round, the speed of the rain will increase. After player one plays four rounds it will be player two's turn.
 
 ##Development & Technologies Used
 - HTML
