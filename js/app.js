@@ -9,7 +9,7 @@ if (bestPlayer) {
 
 var generateGame = function() {
     $body.css({
-        background: '-webkit-linear-gradient(top, #4b6cb7 5%, #182848 100%)'        
+        background: '-webkit-linear-gradient(top, #4b6cb7 5%, #182848 100%) no-repeat center center fixed'        
     });
 
     var $header = $('<header>');
@@ -48,7 +48,6 @@ var game = {
     checkBestScore: function(player) {
         var player = player;
         var getBest = JSON.parse(localStorage.getItem('bestScore'));
-        console.log(getBest)
         if (getBest == null) {
             localStorage.setItem('bestScore', JSON.stringify(player));
         } else {
@@ -188,7 +187,7 @@ var game = {
     level_three: function() {
         $('#game-header').text("Wow! Its really coming down now");
         $('.clouds').css({
-            background: '-webkit-linear-gradient(top, rgb(201, 207, 212) 5%, rgb(69, 193, 255) 100%)'
+            background: '-webkit-linear-gradient(top, rgb(201, 207, 212) 5%, rgb(69, 193, 255) 100%) no-repeat center center fixed'
         })
 
 
